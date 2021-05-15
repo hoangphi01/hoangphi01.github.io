@@ -1,0 +1,61 @@
+{% extends "citizens/layout.html" %}
+
+{% block body %}
+<div
+    style="position: relative; background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0.62))), url(https://i.ibb.co/Pwx24qQ/loginpage.png); background-size: cover; background-position: top;"
+    class="h-100 d-flex justify-content-center"
+    >
+    <!-- <div class="px-5 h-100"> -->
+        <!-- <div style="position: relative;" class="h-100"> -->
+            <div class="card align-middle" style="width: fit-content; position: absolute; top: 50%; transform: translateY(-50%);">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="card-title"><b>Thông tin chi tiết</b></h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Tài khoản đang truy cập: {{request.user.username}}</h6>
+                    <a href="{% url 'citizens:index' %}" class="btn btn-dark btn-sm my-1 mx-auto" style="width: 320px;" role="button">Quay về</a>
+                    <button class="btn btn-success hidden-print btn-sm mx-auto my-2" onclick="window.print()" style="width: 345px;" ><span class="glyphicon glyphicon-print" aria-hidden="true"></span>In thông tin</button>
+                    <a href="mailto:support@email.com" target="_blank" class="btn btn-sm btn-secondary my-1 mx-auto" style="width: 320px;">Gửi thông tin qua email</a>
+                </div>
+                <div class="card-group">
+                    <div class="card">
+                      <img src="https://i.ibb.co/DLrKP5d/cir.jpg" class="card-img-top" alt="citizen">
+                      <div class="card-body">
+                        <h5 class="card-title list-group-item list-group-item-primary">Công dân {{ citizen.sID }}</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Tên công dân:</b> {{ citizen.name }}</li>
+                            <li class="list-group-item"><b>Giới tính:</b> {{ citizen.sex }}</li>
+                            <li class="list-group-item"><b>Năm sinh:</b> {{ citizen.year }}</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <img src="https://i.ibb.co/tB9P8MV/passr.jpg" class="card-img-top" alt="passport">
+                      <div class="card-body">
+                        <h5 class="card-title list-group-item list-group-item-success">Thông tin hộ chiếu:</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Loại hộ chiếu:</b> {{ passport.pType }}</li>
+                            <li class="list-group-item"><b>Số hộ chiếu:</b> {{ passport.Number }}</li>
+                            <li class="list-group-item"><b>Thời hạn hiệu lực:</b> {{ passport.validTime }}</li>
+                            <li class="list-group-item"><b>Nơi cấp:</b> {{ passport.pLocation }}</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <img src="https://i.ibb.co/rGzjPQJ/topographic-map-with-colored-needles-pushpins.jpg" class="card-img-top" alt="history">
+                      <div class="card-body">
+                        <h5 class="card-title list-group-item list-group-item-info">Lịch sử di chuyển:</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Địa điểm đi:</b> {{ history.origin }}</li>
+                            <li class="list-group-item"><b>Thời gian đi:</b> {{ history.originTime }}</li>
+                            <li class="list-group-item"><b>Địa điểm đến:</b> {{ history.destination }}</li>
+                            <li class="list-group-item"><b>Thời gian đến:</b> {{ history.destinationTime }}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>  
+
+{% endblock %}
+

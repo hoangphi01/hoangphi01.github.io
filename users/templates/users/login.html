@@ -1,0 +1,39 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+
+<!-- <a href="https://ibb.co/7RgNJpf"><img src="https://i.ibb.co/RBh4p6F/login-page.png" alt="login-page" border="0"></a> -->
+
+    <div
+        style="position: relative; background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0,0,0,0.5)), color-stop(100%,rgba(0,0,0,0.62))), url(https://i.ibb.co/Pwx24qQ/loginpage.png); background-size: cover; background-position: top;"
+        class="h-100 d-flex justify-content-center"
+    >
+        <div class="card align-middle" style="width: fit-content; position: absolute; top: 50%; transform: translateY(-50%);">
+            <div class="card-body">
+                <h2 class="card-title">Hệ thống Quản lý Dữ liệu Công dân</h2>
+                <h5 class="card-title"><b>Đăng nhập</b></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Sử dụng tên đăng nhập và mật khẩu được cung cấp.</h6>
+                <form action="{% url 'users:login' %}" method="POST">
+                    {% if message %}
+                        <div class="alert alert-warning" role="alert">{{message}}</div>
+                    {% endif %}
+
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Tên đăng nhập</label>
+                        <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <input type="submit" value="Login" class="btn btn-primary" style="width: 250px;">
+                    <a href="{% url 'admin:index' %}" class="btn btn btn-warning my-2 mx-auto" style="width: 250px;" role="button">Truy cập trang quản trị</a>
+                </form>
+                <h8 class="card-subtitle mb-2 text-muted">Website này được phát triển vào tháng 05 năm 2021.</h8>
+            </div>
+        </div>
+    </div>
+        
+{% endblock %}

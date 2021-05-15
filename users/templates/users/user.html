@@ -1,0 +1,29 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+<div
+        style="background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0.3))), url(https://i.ibb.co/Pwx24qQ/loginpage.png); background-size: cover; background-position: top;"
+        class="h-100"
+    >
+    <div class="px-5 h-100">
+        <div style="position: relative;" class="h-100">
+            <div class="card align-middle" style="width: fit-content; position: absolute; top: 50%; transform: translateY(-50%);">
+                <img src="https://i.ibb.co/jzfpbVK/uselap.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h4 class="card-title">Hệ thống Quản lý Dữ liệu Công dân</h4>
+                    <h5 class="card-subtitle mb-2 text-muted">Chào mừng, {{request.user.username}}</h5>
+                    <p class="card-text">Username của bạn là: "{{request.user.username}}", bạn có thể <br/>sử dụng "{{request.user.username}}" để truy cập cơ sở dữ liệu.</p>
+                    <p class="card-text">Sử dụng nút "Đăng xuất" để đăng xuất khỏi <br/>tài khoản này.</p>
+                    <p class="card-text">Sử dụng nút "Truy cập trang quản trị" để chỉnh sửa<br/> cơ sở dữ liệu. <b>(Yêu cầu tài khoản admin)</b></p>
+                    <a href="{% url 'citizens:index' %}" class="btn btn-outline-success " role="button">Truy cập Cơ sở dữ liệu</a>
+                    <a href="{% url 'users:logout' %}" class="btn btn-outline-danger" style="width: 177px;" role="button">Đăng xuất</a>
+                </div>
+                <a href="{% url 'admin:index' %}" class="btn btn-outline-dark my-3 mx-auto" style="width: 370px;" role="button">Truy cập trang quản trị</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

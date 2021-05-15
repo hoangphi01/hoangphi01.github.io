@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link btn btn-outline-info" href="#" role="button">Quay lại</a>
+          <a class="nav-link btn btn-outline-danger" href="{% url 'users:logout' %}" role="button">Đăng xuất</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Sử dụng nút "Đăng xuất" để đăng xuất khỏi hệ thống.</a>
+          <a class="nav-link active btn btn-outline-info" aria-current="{% url 'citizens:citizen' %}" href="{% url 'users:index' %}" role="button">Quay về màn hình chính</a>  
+        </div>
+      </div>
+    </div>
+</nav>
+
+
+<nav class="nav navbar-expand-lg">
+    <a href="{% url 'users:index' %}" class="btn btn-outline-info" role="button">Quay lại màn hình chính</a>
+    <a href="{% url 'users:logout' %}" class="btn btn-outline-danger" role="button">Đăng xuất</a>
+    <a class="nav-link disabled text-info" href="#" tabindex="-1" aria-disabled="true">Sử dụng nút "Đăng xuất" để đăng xuất khỏi hệ thống.</a>
+</nav>
+
+
+<div
+    style="position: relative; background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0,0,0,0.5)), color-stop(100%,rgba(0,0,0,0.62))), url(https://i.ibb.co/Pwx24qQ/loginpage.png); background-size: cover; background-position: top;"
+    class="h-100 d-flex justify-content-center"
+    >
+    <!-- <div class="px-5 h-100"> -->
+        <!-- <div style="position: relative;" class="h-100"> -->
+            <div class="card align-middle" style="width: fit-content; position: absolute; top: 50%; transform: translateY(-50%);">
+                <div class="card-body">
+                    <h2 class="card-title">Hệ thống Quản lý Dữ liệu Công dân</h2>
+                    <h5 class="card-title"><b>Thông tin chi tiết</b></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Tài khoản đang truy cập: {{request.user.username}}</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-primary">Citizen {{ citizen.sID }}</li>
+                        <li class="list-group-item">Tên công dân: {{ citizen.name }}</li>
+                        <li class="list-group-item">Giới tính: {{ citizen.sex }}</li>
+                        <li class="list-group-item">Năm sinh: {{ citizen.year }}</li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">Thông tin hộ chiếu:</li>
+                        <li class="list-group-item">Loại hộ chiếu: {{ passport.pType }}</li>
+                        <li class="list-group-item">Số hộ chiếu: {{ passport.Number }}</li>
+                        <li class="list-group-item">Thời hạn hiệu lực: {{ passport.validTime }}</li>
+                        <li class="list-group-item">Nơi cấp: {{ passport.pLocation }}</li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">Lịch sử di chuyển:</li>
+                        <li class="list-group-item">Địa điểm đi: {{ history.origin }}</li>
+                        <li class="list-group-item">Thời gian đi: {{ history.originTime }}</li>
+                        <li class="list-group-item">Địa điểm đến: {{ history.destination }}</li>
+                        <li class="list-group-item">Thời gian đến: {{ history.destinationTime }}</li>
+                    </ul>
+                    <a href="{% url 'citizens:index' %}" class="btn btn-outline-primary" role="button">Quay lại</a>
+   
+                    <a href="{% url 'users:index' %}" class="btn btn-outline-primary" role="button">Quay về màn hình chính</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>  
+
+
+<div class="card-group">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">Hệ thống Quản lý Dữ liệu Công dân</h4>
+        <h5 class="card-title"><b>Thông tin chi tiết</b></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Tài khoản đang truy cập: {{request.user.username}}</h6>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">Citizen {{ citizen.sID }}</li>
+            <li class="list-group-item">Tên công dân: {{ citizen.name }}</li>
+            <li class="list-group-item">Giới tính: {{ citizen.sex }}</li>
+            <li class="list-group-item">Năm sinh: {{ citizen.year }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title list-group-item list-group-item-success">Thông tin hộ chiếu:</h4>
+        <ul class="list-group">
+            <li class="list-group-item">Loại hộ chiếu: {{ passport.pType }}</li>
+            <li class="list-group-item">Số hộ chiếu: {{ passport.Number }}</li>
+            <li class="list-group-item">Thời hạn hiệu lực: {{ passport.validTime }}</li>
+            <li class="list-group-item">Nơi cấp: {{ passport.pLocation }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title list-group-item list-group-item-info">Lịch sử di chuyển:</h4>
+        <ul class="list-group">
+            <li class="list-group-item">Địa điểm đi: {{ history.origin }}</li>
+            <li class="list-group-item">Thời gian đi: {{ history.originTime }}</li>
+            <li class="list-group-item">Địa điểm đến: {{ history.destination }}</li>
+            <li class="list-group-item">Thời gian đến: {{ history.destinationTime }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
