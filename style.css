@@ -1,0 +1,29 @@
+body {
+    background-image: url("background.jpg");
+    
+}
+
+#mainContent {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    justify-content: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    text-align: center;
+}
+
+.center-cardbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh
+}
+
+.card-opacity {
+    opacity: 0.9;
+}
