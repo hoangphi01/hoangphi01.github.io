@@ -54,13 +54,10 @@
                                 <summary class="small text-muted">Example: −55 ≡ 7 (mod 31)</summary>
                                 <div class="small mt-1">
                                     Giả sử a = −55, n = 31.
-                                    <br>Chia −55 cho 31:
                                     <br>−55 = −2·31 + 7.
                                     <br>Số dư là 7 nên:
                                     <br>−55 ≡ 7 (mod 31).
-                                    <br>Khi nhập:
-                                    <br>a = -55, b = 0, n = 31
-                                    <br>thì ô a mod n sẽ cho kết quả 7.
+                                    <br>Nhập a = -55, b = 0, n = 31 để xem a mod n = 7.
                                 </div>
                             </details>
 
@@ -115,20 +112,19 @@
                             <details class="mt-2">
                                 <summary class="small text-muted">Example: 1011 XOR 1100</summary>
                                 <div class="small mt-1">
-                                    Chọn chế độ Binary.
+                                    Chọn Binary.
                                     <br>A = 1011, B = 1100.
-                                    <br>XOR từng bit:
+                                    <br>Bit theo bit:
                                     <br>1 xor 1 = 0,
                                     0 xor 1 = 1,
                                     1 xor 0 = 1,
                                     1 xor 0 = 1.
-                                    <br>Nên kết quả là 0111 (nhị phân) tương đương 7 (thập phân).
-                                    <br>Tool sẽ hiện cả hai giá trị decimal và binary.
+                                    <br>Kết quả 0111 (nhị phân) tương đương 7 (thập phân).
                                 </div>
                             </details>
 
                             <p class="small text-muted mt-2 mb-0">
-                                Dùng để ôn XOR trong stream cipher, One Time Pad, AddRoundKey của AES.
+                                Dùng cho stream cipher, One Time Pad, AddRoundKey của AES.
                             </p>
                         </div>
                     </div>
@@ -181,22 +177,20 @@
                             <details class="mt-2">
                                 <summary class="small text-muted">Example: HELLO với key CAT</summary>
                                 <div class="small mt-1">
-                                    Ánh xạ chữ cái:
-                                    <br>H=7, E=4, L=11, O=14; C=2, A=0, T=19.
-                                    <br>Lặp key: CATCA.
+                                    Ánh xạ: H=7, E=4, L=11, O=14; C=2, A=0, T=19.
+                                    <br>Key lặp: CATCA.
                                     <br>Cộng mod 26:
-                                    <br>H(7)+C(2)=9 → J,
-                                    E(4)+A(0)=4 → E,
-                                    L(11)+T(19)=30 ≡ 4 → E,
-                                    L(11)+C(2)=13 → N,
-                                    O(14)+A(0)=14 → O.
-                                    <br>Kết quả: JEENO.
-                                    <br>Nhập message HELLO, key CAT và chọn Encrypt để kiểm tra.
+                                    <br>H+C=7+2=9 → J,
+                                    E+A=4+0=4 → E,
+                                    L+T=11+19=30 ≡ 4 → E,
+                                    L+C=11+2=13 → N,
+                                    O+A=14+0=14 → O.
+                                    <br>Kết quả JEENO.
                                 </div>
                             </details>
 
                             <p class="small text-muted mt-2 mb-0">
-                                Cộng mod 26 theo từ khóa lặp lại, dùng chung với Alphabet converter.
+                                Cộng mod 26 theo từ khóa lặp, dùng chung với Alphabet converter.
                             </p>
                         </div>
                     </div>
@@ -256,8 +250,7 @@
                                     <br>12 = 2·6 + 0
                                     <br>gcd(30,18) = 6.
                                     <br>Inverse:
-                                    <br>Nhập a = 7, m = 26. Tool dùng Euclid mở rộng để tìm x sao cho 7x ≡ 1 (mod 26).
-                                    <br>Kết quả sẽ là 15 vì 7·15 = 105 ≡ 1 (mod 26).
+                                    <br>7·15 = 105 ≡ 1 (mod 26) nên 7⁻¹ ≡ 15 (mod 26).
                                 </div>
                             </details>
 
@@ -306,17 +299,10 @@
                             <details class="mt-2">
                                 <summary class="small text-muted">Example: 3⁴⁹ mod 11</summary>
                                 <div class="small mt-1">
-                                    Viết 49 dạng nhị phân: 49 = 32 + 16 + 1 = 110001₂.
-                                    <br>Tính dần:
-                                    <br>3¹ mod 11 = 3
-                                    <br>3² mod 11 = 9
-                                    <br>3⁴ mod 11 = 9² = 81 ≡ 4
-                                    <br>3⁸ mod 11 = 4² = 16 ≡ 5
-                                    <br>3¹⁶ mod 11 = 5² = 25 ≡ 3
-                                    <br>3³² mod 11 = 3²·3¹⁶ = 9·3 = 27 ≡ 5
-                                    <br>3⁴⁹ = 3³²·3¹⁶·3¹
-                                    <br>→ 5·3·3 = 45 ≡ 1 (mod 11).
-                                    <br>Nhập a=3, b=49, n=11 để xem tool làm và so với phép tính trực tiếp.
+                                    49 = 32 + 16 + 1.
+                                    <br>Tool dùng biểu diễn nhị phân của 49 và thuật toán bình phương và nhân để tính
+                                    3⁴⁹ mod 11.
+                                    <br>Kết quả cuối cùng là 1.
                                 </div>
                             </details>
 
@@ -360,11 +346,10 @@
                                     <br>2. Lũy thừa:
                                     <br>7¹ ≡ 7 (mod 100)
                                     <br>7² ≡ 49 (mod 100)
-                                    <br>7³ = 49·7 = 343 ≡ 43 (mod 100)
-                                    <br>7⁴ = 43·7 = 301 ≡ 1 (mod 100)
+                                    <br>7³ ≡ 43 (mod 100)
+                                    <br>7⁴ ≡ 1 (mod 100)
                                     <br>3. Không có số mũ nhỏ hơn 4 cho ra 1 nên ord₁₀₀(7) = 4.
-                                    <br>4. Rút gọn số mũ:
-                                    <br>79 = 4·19 + 3 nên 7⁷⁹ ≡ 7³ ≡ 43 (mod 100).
+                                    <br>4. 79 = 4·19 + 3 nên 7⁷⁹ ≡ 7³ ≡ 43 (mod 100).
                                 </div>
                             </details>
                         </div>
@@ -429,13 +414,9 @@
                             <details class="mt-2">
                                 <summary class="small text-muted">Example: φ(33), Euler và Fermat nhỏ</summary>
                                 <div class="small mt-1">
-                                    φ(33):
-                                    <br>33 = 3·11 là tích hai số nguyên tố nên φ(33) = (3−1)(11−1) = 2·10 = 20.
-                                    <br>Euler:
-                                    <br>Chọn a = 2, n = 33, ta kỳ vọng 2²⁰ mod 33 = 1 nếu gcd(2,33)=1.
-                                    <br>Fermat:
-                                    <br>Chọn p = 31, a = 2. Định lý Fermat nhỏ nói 2³⁰ ≡ 1 (mod 31).
-                                    <br>Có thể nhập các giá trị này vào form để xem tool tính.
+                                    33 = 3·11 nên φ(33) = (3−1)(11−1) = 20.
+                                    <br>Với a = 2, n = 33, ta trông đợi 2²⁰ mod 33 = 1.
+                                    <br>Với p = 31, a = 2, định lý Fermat nhỏ nói 2³⁰ ≡ 1 (mod 31).
                                 </div>
                             </details>
 
@@ -475,13 +456,12 @@
                             <details class="mt-2">
                                 <summary class="small text-muted">Example: 3 có là generator mod 31 không</summary>
                                 <div class="small mt-1">
-                                    Với p = 31, p − 1 = 30.
-                                    <br>Phân tích 30 = 2·3·5 nên các ước nguyên tố là 2, 3, 5.
-                                    <br>3 là generator nếu:
-                                    <br>3^{30/2} = 3^{15} mod 31 ≠ 1
-                                    <br>3^{30/3} = 3^{10} mod 31 ≠ 1
-                                    <br>3^{30/5} = 3^{6} mod 31 ≠ 1.
-                                    <br>Tool sẽ tự tính các lũy thừa này và thông báo 3 là generator hay không.
+                                    p = 31, p−1 = 30 = 2·3·5.
+                                    <br>3 là generator nếu
+                                    <br>3¹⁵ mod 31 ≠ 1,
+                                    3¹⁰ mod 31 ≠ 1,
+                                    3⁶ mod 31 ≠ 1.
+                                    <br>Tool tự tính các giá trị này để kết luận.
                                 </div>
                             </details>
 
@@ -493,47 +473,59 @@
                 </div>
             </div>
 
-            <!-- Cipher cheat sheet -->
+            <!-- Diffie Hellman key exchange -->
             <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm h-100">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title mb-3">Cipher cheat sheet</h5>
-                        <div class="small">
-                            <p class="mb-1">
-                                <strong>Affine</strong>: C = (a·P + b) mod n. Cần modular inverse cho a⁻¹ mod n.
-                            </p>
-                            <p class="mb-1">
-                                <strong>Vigenere</strong>: cộng mod 26 theo key. Dùng thẻ Vigenere + Alphabet converter.
-                            </p>
-                            <p class="mb-1">
-                                <strong>AES</strong>: XOR (AddRoundKey), nhân ma trận trong GF(2⁸), nghịch đảo trong
-                                GF(2⁸).
-                            </p>
-                            <p class="mb-1">
-                                <strong>RSA</strong>: C = Mᵉ mod n, M = Cᵈ mod n. Cần Euclid mở rộng, φ(n), lũy thừa
-                                nhanh.
-                            </p>
-                            <p class="mb-1">
-                                <strong>Diffie Hellman</strong>: K = g^{ab} mod p. Cần primitive root g, fast
-                                exponentiation.
-                            </p>
-                            <p class="mb-1">
-                                <strong>Miller Rabin</strong>: dựa trên việc kiểm tra x² ≡ 1 mod n có nghiệm không tầm
-                                thường.
-                            </p>
+                        <h5 class="card-title mb-3">Diffie Hellman shared key</h5>
+
+                        <form id="dhForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="dhP" class="form-label">p (prime modulus)</label>
+                                <input type="text" class="form-control" id="dhP" placeholder="31" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="dhG" class="form-label">g (generator)</label>
+                                <input type="text" class="form-control" id="dhG" placeholder="3" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="dhA" class="form-label">A (Alice public key)</label>
+                                <input type="text" class="form-control" id="dhA" placeholder="26" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="dhB" class="form-label">B (Bob public key)</label>
+                                <input type="text" class="form-control" id="dhB" placeholder="17" required>
+                            </div>
+                            <button type="submit" class="btn btn-info w-100 mt-1">
+                                Compute shared secret K
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="dhResult" class="mt-1 p-2 bg-light border rounded" style="min-height: 4rem;"></pre>
 
                             <details class="mt-2">
-                                <summary class="small text-muted">Example: dùng toolkit để giải RSA nhỏ</summary>
-                                <div class="small mt-1">
-                                    1. Chọn p, q nhỏ và tính n = p·q, φ(n) bằng thẻ Euler phi.
-                                    <br>2. Chọn e sao cho gcd(e, φ(n)) = 1 dùng thẻ GCD.
-                                    <br>3. Dùng thẻ inverse để tính d = e⁻¹ mod φ(n).
-                                    <br>4. Mã hóa và giải mã M dùng thẻ Fast modular exponentiation.
+                                <summary class="small text-muted">Example: p=31, g=3, x=5, y=7</summary>
+                                <div class="small mt-1" style="max-height: 220px; overflow-y: auto;">
+                                    1. Tham số công khai:
+                                    <br>p = 31 (nguyên tố), g = 3 (generator của Z₃₁*).
+                                    <br>2. Bí mật:
+                                    <br>Alice chọn x = 5, Bob chọn y = 7.
+                                    <br>3. Khóa công khai:
+                                    <br>A = gˣ = 3⁵ ≡ 26 (mod 31).
+                                    <br>B = gʸ = 3⁷ ≡ 17 (mod 31).
+                                    <br>4. Khóa chung:
+                                    <br>Alice tính K = Bˣ = 17⁵ ≡ 26 (mod 31).
+                                    <br>Bob tính K = Aʸ = 26⁷ ≡ 26 (mod 31).
+                                    <br>Cả hai thu được K = 26. Người nghe lén chỉ biết p, g, A, B nhưng không biết x,
+                                    y.
                                 </div>
                             </details>
 
-                            <p class="mt-2 mb-0 text-muted">
-                                Lời khuyên: ưu tiên thành thạo Euclid mở rộng và lũy thừa nhanh.
+                            <p class="small text-muted mt-2 mb-0">
+                                Tool sẽ tìm lại x, y bằng brute force với p nhỏ, sau đó tính K để minh họa cơ chế Diffie
+                                Hellman.
                             </p>
                         </div>
                     </div>
@@ -568,10 +560,9 @@
                         <details class="mt-2">
                             <summary class="small text-muted">Example: HELLO → 7 4 11 11 14</summary>
                             <div class="small mt-1">
-                                Ánh xạ A → 0, B → 1, ..., Z → 25.
-                                <br>H là chữ cái thứ 8 nên H → 7.
-                                <br>E → 4, L → 11, O → 14.
-                                <br>Nhập HELLO vào ô Letters, tool sẽ trả về 7 4 11 11 14.
+                                H là chữ cái thứ 8 nên giá trị 7,
+                                E → 4, L → 11, O → 14.
+                                <br>Nhập HELLO để thấy chuỗi 7 4 11 11 14.
                             </div>
                         </details>
 
@@ -595,9 +586,7 @@
                             <details class="mt-2">
                                 <summary class="small text-muted">Example: 19 7 4 → THE</summary>
                                 <div class="small mt-1">
-                                    Nhập "19 7 4".
-                                    <br>19 → T, 7 → H, 4 → E.
-                                    <br>Kết quả là THE.
+                                    19 → T, 7 → H, 4 → E.
                                 </div>
                             </details>
                         </div>
@@ -628,9 +617,7 @@
                         <details class="mt-2">
                             <summary class="small text-muted">Example: 13 → 1101₂</summary>
                             <div class="small mt-1">
-                                13 = 8 + 4 + 1 = 2³ + 2² + 2⁰.
-                                <br>Nên dạng nhị phân là 1101.
-                                <br>Nhập 13, tool sẽ in 1101.
+                                13 = 8 + 4 + 1 = 2³ + 2² + 2⁰ nên dạng nhị phân là 1101.
                             </div>
                         </details>
 
@@ -654,11 +641,54 @@
                             <details class="mt-2">
                                 <summary class="small text-muted">Example: 1010₂ → 10</summary>
                                 <div class="small mt-1">
-                                    1010₂ = 1·2³ + 0·2² + 1·2¹ + 0·2⁰
-                                    = 8 + 0 + 2 + 0 = 10.
-                                    <br>Nhập 1010, tool sẽ trả về 10.
+                                    1010₂ = 1·2³ + 0·2² + 1·2¹ + 0·2⁰ = 8 + 2 = 10.
                                 </div>
                             </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cipher cheat sheet -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Cipher cheat sheet</h5>
+                        <div class="small">
+                            <p class="mb-1">
+                                <strong>Affine</strong>: C = (a·P + b) mod n. Cần modular inverse cho a⁻¹ mod n.
+                            </p>
+                            <p class="mb-1">
+                                <strong>Vigenere</strong>: cộng mod 26 theo key. Dùng thẻ Vigenere + Alphabet converter.
+                            </p>
+                            <p class="mb-1">
+                                <strong>AES</strong>: XOR, nhân ma trận trong GF(2⁸), nghịch đảo trong GF(2⁸).
+                            </p>
+                            <p class="mb-1">
+                                <strong>RSA</strong>: C = Mᵉ mod n, M = Cᵈ mod n. Cần Euclid mở rộng, φ(n), lũy thừa
+                                nhanh.
+                            </p>
+                            <p class="mb-1">
+                                <strong>Diffie Hellman</strong>: K = g^{ab} mod p. Cần primitive root g, fast
+                                exponentiation.
+                            </p>
+                            <p class="mb-1">
+                                <strong>Miller Rabin</strong>: kiểm tra nghiệm không tầm thường của x² ≡ 1 mod n.
+                            </p>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: dùng toolkit để giải RSA nhỏ</summary>
+                                <div class="small mt-1">
+                                    1. Dùng phi(n) để tính φ(n).
+                                    <br>2. Chọn e với gcd(e, φ(n)) = 1 bằng thẻ GCD.
+                                    <br>3. Dùng inverse để tìm d = e⁻¹ mod φ(n).
+                                    <br>4. Mã hóa và giải mã với thẻ Fast exponentiation.
+                                </div>
+                            </details>
+
+                            <p class="mt-2 mb-0 text-muted">
+                                Lời khuyên: ưu tiên nắm Euclid mở rộng và lũy thừa nhanh.
+                            </p>
                         </div>
                     </div>
                 </div>

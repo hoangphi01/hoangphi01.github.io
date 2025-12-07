@@ -259,7 +259,21 @@ function isGeneratorModPrime(g, p) {
     };
 }
 
-// 5. Alphabet and number converters
+// 5. Diffie Hellman helper
+
+function discreteLogBruteforce(g, value, p) {
+    const maxIter = p - 1n;
+    let current = 1n;
+    for (let x = 0n; x <= maxIter; x++) {
+        if (current === value) {
+            return x;
+        }
+        current = modBigInt(current * g, p);
+    }
+    throw new Error('Cannot find exponent x such that g^x ≡ value (mod p). Maybe g is not a generator or p is too large.');
+}
+
+// 6. Alphabet and number converters
 
 function lettersToNumbers(text) {
     const base = 'A'.charCodeAt(0);
@@ -287,7 +301,7 @@ function numbersToLetters(nums) {
     return result;
 }
 
-// 6. Decimal and binary
+// 7. Decimal and binary
 
 function decimalToBinary(decStr) {
     const trimmed = decStr.trim();
@@ -600,6 +614,60 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } catch (err) {
             genResult.textContent = 'Error: ' + err.message;
+        }
+    });
+
+    // Diffie Hellman
+    const dhForm = document.getElementById('dhForm');
+    const dhResult = document.getElementById('dhResult');
+
+    dhForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const pStr = document.getElementById('dhP').value;
+        const gStr = document.getElementById('dhG').value;
+        const aStr = document.getElementById('dhA').value;
+        const bStr = document.getElementById('dhB').value;
+
+        try {
+            const p = parseBigInt(pStr);
+            const g = parseBigInt(gStr);
+            const A = parseBigInt(aStr);
+            const B = parseBigInt(bStr);
+
+            if (p <= 2n) {
+                throw new Error('p must be an odd prime greater than 2 for this demo');
+            }
+
+            if (p > 200000n) {
+                throw new Error('p is too large for brute force discrete log in this demo. Use small lab examples.');
+            }
+
+            const x = discreteLogBruteforce(g, modBigInt(A, p), p);
+            const y = discreteLogBruteforce(g, modBigInt(B, p), p);
+
+            const K_A = modPowFast(B, x, p);
+            const K_B = modPowFast(A, y, p);
+
+            let text = '';
+            text += `Public parameters: p = ${p.toString()}, g = ${g.toString()}\n`;
+            text += `Public keys: A = ${A.toString()}, B = ${B.toString()}\n\n`;
+            text += `Step 1: Find Alice secret x such that g^x ≡ A (mod p).\n`;
+            text += `        Found x = ${x.toString()} because g^x mod p = ${modPowFast(g, x, p).toString()}\n\n`;
+            text += `Step 2: Find Bob secret y such that g^y ≡ B (mod p).\n`;
+            text += `        Found y = ${y.toString()} because g^y mod p = ${modPowFast(g, y, p).toString()}\n\n`;
+            text += `Step 3: Alice computes K_A = B^x mod p = ${K_A.toString()}\n`;
+            text += `Step 4: Bob computes K_B = A^y mod p = ${K_B.toString()}\n\n`;
+
+            if (K_A === K_B) {
+                text += `Shared secret K = ${K_A.toString()}\n`;
+                text += `Check: K_A and K_B are equal so the shared key is consistent.`;
+            } else {
+                text += `Warning: K_A != K_B so something is inconsistent in the inputs.`;
+            }
+
+            dhResult.textContent = text;
+        } catch (err) {
+            dhResult.textContent = 'Error: ' + err.message;
         }
     });
 
