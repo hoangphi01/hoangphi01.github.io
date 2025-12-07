@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Crypto and Number Toolkit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-5">
+        <h2 class="mb-3 text-center">Crypto and Number Toolkit</h2>
+        <p class="text-center text-muted mb-4">
+            Modular arithmetic, Euclidean algorithms, number theory tools, cipher helpers
+        </p>
+
+        <!-- 1. Modular arithmetic -->
+        <h4 class="mt-3 mb-3">1. Modular arithmetic</h4>
+        <div class="row g-4 mb-4">
+
+            <!-- Basic modular arithmetic -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Basic modular arithmetic</h5>
+
+                        <form id="basicModForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="basicA" class="form-label">a</label>
+                                <input type="text" class="form-control" id="basicA" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="basicB" class="form-label">b</label>
+                                <input type="text" class="form-control" id="basicB" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="basicN" class="form-label">n (modulus)</label>
+                                <input type="text" class="form-control" id="basicN" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 mt-1">
+                                Compute a, b, a±b, a·b mod n
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="basicModResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 3.2rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: −55 ≡ 7 (mod 31)</summary>
+                                <div class="small mt-1">
+                                    Giả sử a = −55, n = 31.
+                                    <br>Chia −55 cho 31:
+                                    <br>−55 = −2·31 + 7.
+                                    <br>Số dư là 7 nên:
+                                    <br>−55 ≡ 7 (mod 31).
+                                    <br>Khi nhập:
+                                    <br>a = -55, b = 0, n = 31
+                                    <br>thì ô a mod n sẽ cho kết quả 7.
+                                </div>
+                            </details>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                Dùng để ôn cộng, trừ, nhân mod n, kể cả với số âm.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- XOR -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Bitwise XOR</h5>
+
+                        <form id="xorForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="xorA" class="form-label">A (integer or binary)</label>
+                                <input type="text" class="form-control" id="xorA" placeholder="13 or 1101" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="xorB" class="form-label">B (integer or binary)</label>
+                                <input type="text" class="form-control" id="xorB" placeholder="7 or 0110" required>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Input type</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="xorMode" id="xorInt"
+                                            value="int" checked>
+                                        <label class="form-check-label" for="xorInt">Integer</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="xorMode" id="xorBin"
+                                            value="bin">
+                                        <label class="form-check-label" for="xorBin">Binary</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mt-1">
+                                Compute A XOR B
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="xorResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 3.2rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: 1011 XOR 1100</summary>
+                                <div class="small mt-1">
+                                    Chọn chế độ Binary.
+                                    <br>A = 1011, B = 1100.
+                                    <br>XOR từng bit:
+                                    <br>1 xor 1 = 0,
+                                    0 xor 1 = 1,
+                                    1 xor 0 = 1,
+                                    1 xor 0 = 1.
+                                    <br>Nên kết quả là 0111 (nhị phân) tương đương 7 (thập phân).
+                                    <br>Tool sẽ hiện cả hai giá trị decimal và binary.
+                                </div>
+                            </details>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                Dùng để ôn XOR trong stream cipher, One Time Pad, AddRoundKey của AES.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vigenere cipher -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Vigenere cipher</h5>
+
+                        <form id="vigenereForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="vigMessage" class="form-label">Message</label>
+                                <input type="text" class="form-control" id="vigMessage" required>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="vigKey" class="form-label">Key</label>
+                                <input type="text" class="form-control" id="vigKey" required>
+                            </div>
+
+                            <div class="mb-2">
+                                <label class="form-label">Mode</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="vigMode" id="vigEncrypt"
+                                            value="encrypt" checked>
+                                        <label class="form-check-label" for="vigEncrypt">Encrypt</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="vigMode" id="vigDecrypt"
+                                            value="decrypt">
+                                        <label class="form-check-label" for="vigDecrypt">Decrypt</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary w-100 mt-1">
+                                Run Vigenere
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="vigResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 2.5rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: HELLO với key CAT</summary>
+                                <div class="small mt-1">
+                                    Ánh xạ chữ cái:
+                                    <br>H=7, E=4, L=11, O=14; C=2, A=0, T=19.
+                                    <br>Lặp key: CATCA.
+                                    <br>Cộng mod 26:
+                                    <br>H(7)+C(2)=9 → J,
+                                    E(4)+A(0)=4 → E,
+                                    L(11)+T(19)=30 ≡ 4 → E,
+                                    L(11)+C(2)=13 → N,
+                                    O(14)+A(0)=14 → O.
+                                    <br>Kết quả: JEENO.
+                                    <br>Nhập message HELLO, key CAT và chọn Encrypt để kiểm tra.
+                                </div>
+                            </details>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                Cộng mod 26 theo từ khóa lặp lại, dùng chung với Alphabet converter.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Euclidean algorithms and fast exponentiation -->
+        <h4 class="mt-3 mb-3">2. Euclidean algorithms and fast exponentiation</h4>
+        <div class="row g-4 mb-4">
+
+            <!-- GCD and inverse -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">GCD and inverse</h5>
+
+                        <form id="gcdForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="gcdA" class="form-label">a</label>
+                                <input type="text" class="form-control" id="gcdA" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="gcdB" class="form-label">b</label>
+                                <input type="text" class="form-control" id="gcdB" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mt-1">
+                                Compute gcd(a, b)
+                            </button>
+                        </form>
+
+                        <form id="invForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="invA" class="form-label">a</label>
+                                <input type="text" class="form-control" id="invA" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="invN" class="form-label">m (modulus)</label>
+                                <input type="text" class="form-control" id="invN" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 mt-1">
+                                Compute a⁻¹ mod m
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="gcdResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 4rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: gcd(30,18) và 7⁻¹ mod 26</summary>
+                                <div class="small mt-1">
+                                    GCD:
+                                    <br>30 = 1·18 + 12
+                                    <br>18 = 1·12 + 6
+                                    <br>12 = 2·6 + 0
+                                    <br>gcd(30,18) = 6.
+                                    <br>Inverse:
+                                    <br>Nhập a = 7, m = 26. Tool dùng Euclid mở rộng để tìm x sao cho 7x ≡ 1 (mod 26).
+                                    <br>Kết quả sẽ là 15 vì 7·15 = 105 ≡ 1 (mod 26).
+                                </div>
+                            </details>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                Dùng cho Affine, RSA, Diffie Hellman.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fast exponentiation -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Fast modular exponentiation</h5>
+
+                        <form id="powForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="powBase" class="form-label">a (base)</label>
+                                <input type="text" class="form-control" id="powBase" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="powExp" class="form-label">b (exponent)</label>
+                                <input type="text" class="form-control" id="powExp" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="powMod" class="form-label">n (modulus)</label>
+                                <input type="text" class="form-control" id="powMod" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-warning w-100 mt-1">
+                                Compute a^b mod n
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Fast exponentiation</h6>
+                            <pre id="powResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 3rem;"></pre>
+
+                            <h6 class="mt-2">Direct BigInt</h6>
+                            <pre id="powDirectResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 3rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: 3⁴⁹ mod 11</summary>
+                                <div class="small mt-1">
+                                    Viết 49 dạng nhị phân: 49 = 32 + 16 + 1 = 110001₂.
+                                    <br>Tính dần:
+                                    <br>3¹ mod 11 = 3
+                                    <br>3² mod 11 = 9
+                                    <br>3⁴ mod 11 = 9² = 81 ≡ 4
+                                    <br>3⁸ mod 11 = 4² = 16 ≡ 5
+                                    <br>3¹⁶ mod 11 = 5² = 25 ≡ 3
+                                    <br>3³² mod 11 = 3²·3¹⁶ = 9·3 = 27 ≡ 5
+                                    <br>3⁴⁹ = 3³²·3¹⁶·3¹
+                                    <br>→ 5·3·3 = 45 ≡ 1 (mod 11).
+                                    <br>Nhập a=3, b=49, n=11 để xem tool làm và so với phép tính trực tiếp.
+                                </div>
+                            </details>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                Dùng cho RSA, Diffie Hellman, ElGamal.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order modulo n -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Order modulo n</h5>
+
+                        <form id="orderForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="orderA" class="form-label">a</label>
+                                <input type="text" class="form-control" id="orderA" placeholder="7" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="orderN" class="form-label">n</label>
+                                <input type="text" class="form-control" id="orderN" placeholder="100" required>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100 mt-1">
+                                Compute ordₙ(a)
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="orderResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 3rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example ord₁₀₀(7) và 7⁷⁹ mod 100</summary>
+                                <div class="small mt-1" style="max-height: 200px; overflow-y: auto;">
+                                    1. gcd(7, 100) = 1 nên order tồn tại.
+                                    <br>2. Lũy thừa:
+                                    <br>7¹ ≡ 7 (mod 100)
+                                    <br>7² ≡ 49 (mod 100)
+                                    <br>7³ = 49·7 = 343 ≡ 43 (mod 100)
+                                    <br>7⁴ = 43·7 = 301 ≡ 1 (mod 100)
+                                    <br>3. Không có số mũ nhỏ hơn 4 cho ra 1 nên ord₁₀₀(7) = 4.
+                                    <br>4. Rút gọn số mũ:
+                                    <br>79 = 4·19 + 3 nên 7⁷⁹ ≡ 7³ ≡ 43 (mod 100).
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Number theory tools -->
+        <h4 class="mt-3 mb-3">3. Number theory tools</h4>
+        <div class="row g-4 mb-4">
+
+            <!-- Euler phi and Euler theorem -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Euler phi and Euler theorem</h5>
+
+                        <form id="phiForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="phiN" class="form-label">n</label>
+                                <input type="text" class="form-control" id="phiN" placeholder="e.g. 33 or 55" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mt-1">
+                                Compute φ(n)
+                            </button>
+                        </form>
+
+                        <form id="eulerForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="eulerA" class="form-label">a</label>
+                                <input type="text" class="form-control" id="eulerA" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="eulerN" class="form-label">n</label>
+                                <input type="text" class="form-control" id="eulerN" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 mt-1">
+                                Check a^{φ(n)} mod n
+                            </button>
+                        </form>
+
+                        <form id="fermForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="fermA" class="form-label">a</label>
+                                <input type="text" class="form-control" id="fermA" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="fermP" class="form-label">p (prime)</label>
+                                <input type="text" class="form-control" id="fermP" required>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100 mt-1">
+                                Check a^{p−1} mod p
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="phiResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 4rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: φ(33), Euler và Fermat nhỏ</summary>
+                                <div class="small mt-1">
+                                    φ(33):
+                                    <br>33 = 3·11 là tích hai số nguyên tố nên φ(33) = (3−1)(11−1) = 2·10 = 20.
+                                    <br>Euler:
+                                    <br>Chọn a = 2, n = 33, ta kỳ vọng 2²⁰ mod 33 = 1 nếu gcd(2,33)=1.
+                                    <br>Fermat:
+                                    <br>Chọn p = 31, a = 2. Định lý Fermat nhỏ nói 2³⁰ ≡ 1 (mod 31).
+                                    <br>Có thể nhập các giá trị này vào form để xem tool tính.
+                                </div>
+                            </details>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                Dùng để tính khóa RSA và rút gọn lũy thừa lớn.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primitive root test -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Primitive root modulo p</h5>
+
+                        <form id="generatorForm" class="mb-3">
+                            <div class="mb-2">
+                                <label for="genG" class="form-label">g (candidate generator)</label>
+                                <input type="text" class="form-control" id="genG" placeholder="e.g. 3" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="genP" class="form-label">p (prime modulus)</label>
+                                <input type="text" class="form-control" id="genP" placeholder="e.g. 31" required>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100 mt-1">
+                                Check if g is a generator
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <h6>Result</h6>
+                            <pre id="genResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 3rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: 3 có là generator mod 31 không</summary>
+                                <div class="small mt-1">
+                                    Với p = 31, p − 1 = 30.
+                                    <br>Phân tích 30 = 2·3·5 nên các ước nguyên tố là 2, 3, 5.
+                                    <br>3 là generator nếu:
+                                    <br>3^{30/2} = 3^{15} mod 31 ≠ 1
+                                    <br>3^{30/3} = 3^{10} mod 31 ≠ 1
+                                    <br>3^{30/5} = 3^{6} mod 31 ≠ 1.
+                                    <br>Tool sẽ tự tính các lũy thừa này và thông báo 3 là generator hay không.
+                                </div>
+                            </details>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                Hữu ích cho Diffie Hellman, ElGamal.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cipher cheat sheet -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Cipher cheat sheet</h5>
+                        <div class="small">
+                            <p class="mb-1">
+                                <strong>Affine</strong>: C = (a·P + b) mod n. Cần modular inverse cho a⁻¹ mod n.
+                            </p>
+                            <p class="mb-1">
+                                <strong>Vigenere</strong>: cộng mod 26 theo key. Dùng thẻ Vigenere + Alphabet converter.
+                            </p>
+                            <p class="mb-1">
+                                <strong>AES</strong>: XOR (AddRoundKey), nhân ma trận trong GF(2⁸), nghịch đảo trong
+                                GF(2⁸).
+                            </p>
+                            <p class="mb-1">
+                                <strong>RSA</strong>: C = Mᵉ mod n, M = Cᵈ mod n. Cần Euclid mở rộng, φ(n), lũy thừa
+                                nhanh.
+                            </p>
+                            <p class="mb-1">
+                                <strong>Diffie Hellman</strong>: K = g^{ab} mod p. Cần primitive root g, fast
+                                exponentiation.
+                            </p>
+                            <p class="mb-1">
+                                <strong>Miller Rabin</strong>: dựa trên việc kiểm tra x² ≡ 1 mod n có nghiệm không tầm
+                                thường.
+                            </p>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: dùng toolkit để giải RSA nhỏ</summary>
+                                <div class="small mt-1">
+                                    1. Chọn p, q nhỏ và tính n = p·q, φ(n) bằng thẻ Euler phi.
+                                    <br>2. Chọn e sao cho gcd(e, φ(n)) = 1 dùng thẻ GCD.
+                                    <br>3. Dùng thẻ inverse để tính d = e⁻¹ mod φ(n).
+                                    <br>4. Mã hóa và giải mã M dùng thẻ Fast modular exponentiation.
+                                </div>
+                            </details>
+
+                            <p class="mt-2 mb-0 text-muted">
+                                Lời khuyên: ưu tiên thành thạo Euclid mở rộng và lũy thừa nhanh.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Converters and helpers -->
+        <h4 class="mt-3 mb-3">4. Converters and helpers</h4>
+        <div class="row g-4 mb-4">
+
+            <!-- Alphabet converter -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Alphabet converter</h5>
+
+                        <form id="alphaToNumForm" class="mb-3">
+                            <h6>Letters to numbers</h6>
+                            <div class="mb-2">
+                                <label for="alphaInput" class="form-label">Letters (A Z)</label>
+                                <input type="text" class="form-control" id="alphaInput" placeholder="ABCZ" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary w-100">
+                                Convert letters to 0 25
+                            </button>
+                        </form>
+
+                        <pre id="alphaToNumResult" class="mt-1 p-2 bg-light border rounded"
+                            style="min-height: 2.3rem;"></pre>
+
+                        <details class="mt-2">
+                            <summary class="small text-muted">Example: HELLO → 7 4 11 11 14</summary>
+                            <div class="small mt-1">
+                                Ánh xạ A → 0, B → 1, ..., Z → 25.
+                                <br>H là chữ cái thứ 8 nên H → 7.
+                                <br>E → 4, L → 11, O → 14.
+                                <br>Nhập HELLO vào ô Letters, tool sẽ trả về 7 4 11 11 14.
+                            </div>
+                        </details>
+
+                        <hr>
+
+                        <form id="numToAlphaForm" class="mt-2 mb-2">
+                            <h6>Numbers to letters</h6>
+                            <div class="mb-2">
+                                <label for="numInput" class="form-label">Numbers 0 25</label>
+                                <input type="text" class="form-control" id="numInput" placeholder="0 1 2 25" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary w-100">
+                                Convert numbers to letters
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <pre id="numToAlphaResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 2.3rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: 19 7 4 → THE</summary>
+                                <div class="small mt-1">
+                                    Nhập "19 7 4".
+                                    <br>19 → T, 7 → H, 4 → E.
+                                    <br>Kết quả là THE.
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decimal and binary converter -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-3">Decimal and binary</h5>
+
+                        <form id="decToBinForm" class="mb-3">
+                            <h6>Decimal to binary</h6>
+                            <div class="mb-2">
+                                <label for="decInput" class="form-label">Decimal integer</label>
+                                <input type="text" class="form-control" id="decInput" placeholder="13" required>
+                            </div>
+                            <button type="submit" class="btn btn-info w-100">
+                                Convert to binary
+                            </button>
+                        </form>
+
+                        <pre id="decToBinResult" class="mt-1 p-2 bg-light border rounded"
+                            style="min-height: 2.3rem;"></pre>
+
+                        <details class="mt-2">
+                            <summary class="small text-muted">Example: 13 → 1101₂</summary>
+                            <div class="small mt-1">
+                                13 = 8 + 4 + 1 = 2³ + 2² + 2⁰.
+                                <br>Nên dạng nhị phân là 1101.
+                                <br>Nhập 13, tool sẽ in 1101.
+                            </div>
+                        </details>
+
+                        <hr>
+
+                        <form id="binToDecForm" class="mt-2 mb-2">
+                            <h6>Binary to decimal</h6>
+                            <div class="mb-2">
+                                <label for="binInput" class="form-label">Binary string</label>
+                                <input type="text" class="form-control" id="binInput" placeholder="1101" required>
+                            </div>
+                            <button type="submit" class="btn btn-info w-100">
+                                Convert to decimal
+                            </button>
+                        </form>
+
+                        <div class="mt-auto">
+                            <pre id="binToDecResult" class="mt-1 p-2 bg-light border rounded"
+                                style="min-height: 2.3rem;"></pre>
+
+                            <details class="mt-2">
+                                <summary class="small text-muted">Example: 1010₂ → 10</summary>
+                                <div class="small mt-1">
+                                    1010₂ = 1·2³ + 0·2² + 1·2¹ + 0·2⁰
+                                    = 8 + 0 + 2 + 0 = 10.
+                                    <br>Nhập 1010, tool sẽ trả về 10.
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="index.html" class="btn btn-outline-secondary btn-sm">
+                Back to home
+            </a>
+        </div>
+    </div>
+
+    <script src="calculation.js"></script>
+</body>
+
+</html>
