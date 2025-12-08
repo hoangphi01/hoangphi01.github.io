@@ -6,7 +6,6 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     min-height: 100vh;
 }
 
@@ -17,6 +16,23 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    
+    /* Fixed background alternative - works on mobile */
+    position: relative;
+}
+
+.page-wrapper::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
 }
 
 /* Card */
@@ -27,6 +43,8 @@ body {
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
 }
 
 /* Profile Image */
@@ -83,5 +101,25 @@ body {
     
     .col-lg-4 {
         margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-wrapper {
+        padding: 15px 10px;
+    }
+    
+    .profile-card .card-body {
+        padding: 15px !important;
+    }
+    
+    .profile-img-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 8px 10px;
+        font-size: 0.85rem;
     }
 }
