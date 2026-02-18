@@ -1,11 +1,12 @@
+/* Font */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
 /* Background */
 body {
     margin: 0;
     padding: 0;
-    background-image: url("background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     min-height: 100vh;
 }
 
@@ -16,8 +17,6 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    
-    /* Fixed background alternative - works on mobile */
     position: relative;
 }
 
@@ -38,22 +37,115 @@ body {
 /* Card */
 .profile-card {
     width: 100%;
-    max-width: 900px;
-    background-color: rgba(255, 255, 255, 0.92);
+    max-width: 68vw;
+    height: 68vh;
+    background: linear-gradient(135deg, #4ade80 0%, #2563eb 100%);
     border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 1px;
+    border-radius: 24px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25), 0 4px 16px rgba(0, 0, 0, 0.15);
     position: relative;
     z-index: 1;
+    overflow: hidden;
+}
+
+
+.profile-card .card-body {
+    height: 100%;
+    background: #ffffff;
+    border-radius: 23px;
+    overflow: hidden;
+}
+
+.profile-card .row {
+    height: 100%;
+}
+
+/* macOS Dots */
+.macos-dots {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    position: relative;
+}
+
+.dot::after {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.macos-dots:hover .dot::after {
+    opacity: 1;
+}
+
+.dot-red { background-color: #ff5f57; }
+.dot-red::after { content: "\00d7"; font-size: 14px; }
+
+.dot-yellow { background-color: #febc2e; }
+.dot-yellow::after { content: "\2013"; font-size: 11px; }
+
+.dot-green { background-color: #28c840; }
+.dot-green::after { content: ""; display: block; width: 8px; height: 8px; border: none; opacity: 0; }
+
+.macos-dots:hover .dot-green::after {
+    opacity: 1;
+    background: transparent;
+    border-top: 2px solid rgba(0, 0, 0, 0.25);
+    border-right: 2px solid rgba(0, 0, 0, 0.25);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+    border-left: 2px solid rgba(0, 0, 0, 0.25);
+    width: 7px;
+    height: 7px;
+    border-radius: 1px;
+}
+
+/* Profile Sidebar */
+.profile-sidebar {
+    background: linear-gradient(135deg, #4ade80 0%, #2563eb 100%);
+    color: #fff;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.profile-sidebar .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.profile-sidebar address {
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* Profile Image */
 .profile-img-wrapper {
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto 15px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .profile-img {
@@ -64,33 +156,130 @@ body {
 
 /* Profile Info */
 .profile-name {
-    font-weight: 600;
+    font-weight: 700;
     margin: 5px 0 10px;
-}
-
-.profile-info address {
-    font-style: normal;
-    color: #666;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
 }
 
 .divider {
-    width: 80px;
+    width: 60px;
     margin: 15px auto;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Tabs */
-.nav-tabs .nav-link {
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.social-links a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* Skill Tags */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.skill-tags .badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 400;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Content Area */
+.content-area {
+    padding: 25px 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Nav Pills */
+.nav-pills {
+    gap: 5px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+}
+
+.nav-pills .nav-link {
     color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 25px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
 }
 
-.nav-tabs .nav-link.active {
-    color: #0d6efd;
+.nav-pills .nav-link:hover {
+    color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.nav-pills .nav-link.active {
+    color: #fff;
+    background: linear-gradient(135deg, #4ade80 0%, #2563eb 100%);
     font-weight: 500;
 }
 
+.nav-pills .nav-link i {
+    margin-right: 3px;
+}
+
+/* Tab Content */
 .tab-content {
-    padding: 20px 10px;
+    padding: 20px 5px;
     text-align: justify;
+    transition: opacity 0.15s ease;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tab-content.fade-out {
+    opacity: 0;
+}
+
+.tab-content.fade-in {
+    opacity: 1;
+}
+
+/* Section headers */
+.tab-content h6 {
+    color: #22c55e;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+}
+
+/* Experience entries hover effect */
+.tab-content .mb-3 {
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.tab-content .mb-3:hover {
+    background: rgba(34, 197, 94, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 /* Responsive */
@@ -98,9 +287,14 @@ body {
     .profile-card {
         max-width: 600px;
     }
-    
-    .col-lg-4 {
-        margin-bottom: 20px;
+
+    .profile-sidebar {
+        border-radius: 16px 16px 0 0;
+        padding: 25px 20px;
+    }
+
+    .content-area {
+        padding: 20px;
     }
 }
 
@@ -108,18 +302,100 @@ body {
     .page-wrapper {
         padding: 15px 10px;
     }
-    
-    .profile-card .card-body {
-        padding: 15px !important;
-    }
-    
+
     .profile-img-wrapper {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
     }
-    
-    .nav-tabs .nav-link {
-        padding: 8px 10px;
-        font-size: 0.85rem;
+
+    .nav-pills .nav-link {
+        padding: 5px 10px;
+        font-size: 0.78rem;
     }
+
+    .nav-pills .nav-link i {
+        display: none;
+    }
+}
+
+/* Card Animations */
+.profile-card {
+    transition: max-width 0.4s ease, height 0.4s ease, border-radius 0.4s ease;
+}
+
+/* Close animation */
+.card-close {
+    animation: closeCard 0.4s ease forwards;
+}
+
+@keyframes closeCard {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Minimize animation */
+.card-minimize {
+    animation: minimizeCard 0.4s ease forwards;
+}
+
+@keyframes minimizeCard {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    100% { transform: scale(0.05) translateY(80vh); opacity: 0; }
+}
+
+/* Restore animation */
+.card-restore {
+    animation: restoreCard 0.4s ease forwards;
+}
+
+@keyframes restoreCard {
+    0% { transform: scale(0.05) translateY(80vh); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Fullscreen */
+.card-fullscreen {
+    max-width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 24px !important;
+}
+
+.card-fullscreen .card-body {
+    border-radius: 23px !important;
+}
+
+/* Dock Icon */
+.dock-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dock-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dock-icon.dock-show {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dock-icon:hover {
+    transform: translateX(-50%) scale(1.15);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.4);
 }
