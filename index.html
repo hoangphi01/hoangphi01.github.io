@@ -23,45 +23,55 @@
             <div class="row g-0">
                 <!-- Left Column - Profile -->
                 <div class="col-lg-4 profile-sidebar text-center">
-                    <h3 class="mb-4">( •_•)</h3>
+                    <div id="profile-details">
+                        <h3 class="mb-4">( •_•)</h3>
 
-                    <div class="profile-img-wrapper">
-                        <img src="profile_picture.jpg" alt="Profile picture" class="profile-img">
-                    </div>
-
-                    <div class="profile-info">
-                        <small class="text-muted">Master</small>
-                        <h5 class="profile-name">PHAM HOANG PHI</h5>
-                        <p class="mb-0">Student at</p>
-                        <p>University of Debrecen</p>
-
-                        <hr class="divider">
-
-                        <address>
-                            <i class="bi bi-geo-alt"></i> Debrecen, Hajdu-Bihar, Hungary
-                        </address>
-
-                        <!-- Social Links -->
-                        <div class="social-links">
-                            <a href="mailto:hoangphi.works@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
-                            <a href="https://www.linkedin.com/in/hoangphi01/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                            <a href="https://github.com/hoangphi01" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+                        <div class="profile-img-wrapper">
+                            <img src="profile_picture.jpg" alt="Profile picture" class="profile-img">
                         </div>
 
-                        <hr class="divider">
+                        <div class="profile-info">
+                            <small class="text-muted">Master</small>
+                            <h5 class="profile-name">PHAM HOANG PHI</h5>
+                            <p class="mb-0">Student at</p>
+                            <p>University of Debrecen</p>
 
-                        <!-- Skill Tags -->
-                        <div class="skill-tags">
-                            <span class="badge">C#</span>
-                            <span class="badge">MATLAB</span>
-                            <span class="badge">Python</span>
-                            <span class="badge">JavaScript</span>
-                            <span class="badge">ASP.NET</span>
-                            <span class="badge">AI/ML</span>
+                            <hr class="divider">
+
+                            <address>
+                                <i class="bi bi-geo-alt"></i> Debrecen, Hajdu-Bihar, Hungary
+                            </address>
+
+                            <!-- Social Links -->
+                            <div class="social-links">
+                                <a href="mailto:hoangphi.works@gmail.com" title="Email"><i class="bi bi-envelope-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/hoangphi01/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://github.com/hoangphi01" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+                            </div>
+
+                            <hr class="divider">
+
+                            <!-- Skill Tags -->
+                            <div class="skill-tags">
+                                <span class="badge">C#</span>
+                                <span class="badge">MATLAB</span>
+                                <span class="badge">Python</span>
+                                <span class="badge">JavaScript</span>
+                                <span class="badge">ASP.NET</span>
+                                <span class="badge">AI/ML</span>
+                            </div>
+
+                            <small class="text-muted d-block mt-3">Updated: Feb 2026</small>
                         </div>
-
-                        <small class="text-muted d-block mt-3">Updated: Feb 2026</small>
                     </div>
+
+                    <!-- Collapsed title (hidden by default) -->
+                    <h5 class="profile-name-collapsed" id="profile-collapsed">PHAM HOANG PHI</h5>
+
+                    <!-- Toggle button (mobile only) -->
+                    <button class="btn-toggle-profile" id="btn-toggle-profile">
+                        <i class="bi bi-chevron-up"></i> Hide
+                    </button>
                 </div>
 
                 <!-- Right Column -->
@@ -125,6 +135,26 @@
         } else {
             card.classList.add('card-fullscreen');
             isFullscreen = true;
+        }
+    });
+
+    // Profile toggle (mobile)
+    const btnToggle = document.getElementById('btn-toggle-profile');
+    const profileDetails = document.getElementById('profile-details');
+    const profileCollapsed = document.getElementById('profile-collapsed');
+    let profileVisible = true;
+
+    btnToggle.addEventListener('click', () => {
+        if (profileVisible) {
+            profileDetails.classList.add('profile-hidden');
+            profileCollapsed.classList.add('profile-collapsed-show');
+            btnToggle.innerHTML = '<i class="bi bi-chevron-down"></i> Show';
+            profileVisible = false;
+        } else {
+            profileDetails.classList.remove('profile-hidden');
+            profileCollapsed.classList.remove('profile-collapsed-show');
+            btnToggle.innerHTML = '<i class="bi bi-chevron-up"></i> Hide';
+            profileVisible = true;
         }
     });
 
