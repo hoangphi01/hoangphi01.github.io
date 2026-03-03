@@ -528,6 +528,9 @@ body {
         margin: 0;
         flex-shrink: 0;
         border-width: 2px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: none;
     }
 
     .profile-info {
