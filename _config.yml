@@ -1,0 +1,24 @@
+title: PHAM Hoang Phi
+description: Portfolio & Security Blog
+url: "https://hoangphi01.github.io"
+baseurl: ""
+
+permalink: /blog/:year/:month/:day/:title/
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - vendor
+
+include:
+  - calculation.html
+  - calculation.js

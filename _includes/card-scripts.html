@@ -1,0 +1,95 @@
+<script>
+    const card = document.querySelector('.profile-card');
+    const dockIcon = document.getElementById('dock-icon');
+    const dotClose = document.getElementById('dot-close');
+    const dotMinimize = document.getElementById('dot-minimize');
+    const dotFullscreen = document.getElementById('dot-fullscreen');
+    let isFullscreen = false;
+
+    // Red dot - Close
+    dotClose.addEventListener('click', () => {
+        card.classList.add('card-close');
+        setTimeout(() => {
+            card.style.display = 'none';
+            // Show a reopen hint after a moment
+            setTimeout(() => {
+                dockIcon.classList.add('dock-show');
+                dockIcon.title = 'Click to reopen';
+            }, 500);
+        }, 400);
+    });
+
+    // Yellow dot - Minimize
+    dotMinimize.addEventListener('click', () => {
+        card.classList.add('card-minimize');
+        setTimeout(() => {
+            card.style.display = 'none';
+            dockIcon.classList.add('dock-show');
+        }, 400);
+    });
+
+    // Green dot - Fullscreen toggle
+    dotFullscreen.addEventListener('click', () => {
+        if (isFullscreen) {
+            card.classList.remove('card-fullscreen');
+            isFullscreen = false;
+        } else {
+            card.classList.add('card-fullscreen');
+            isFullscreen = true;
+        }
+    });
+
+    // Profile toggle (mobile)
+    const btnToggle = document.getElementById('btn-toggle-profile');
+    const profileDetails = document.getElementById('profile-details');
+    const profileCollapsed = document.getElementById('profile-collapsed');
+    let profileVisible = true;
+
+    btnToggle.addEventListener('click', () => {
+        if (profileVisible) {
+            profileDetails.classList.add('profile-hidden');
+            profileCollapsed.classList.add('profile-collapsed-show');
+            btnToggle.innerHTML = '<i class="bi bi-chevron-down"></i> Show';
+            profileVisible = false;
+        } else {
+            profileDetails.classList.remove('profile-hidden');
+            profileCollapsed.classList.remove('profile-collapsed-show');
+            btnToggle.innerHTML = '<i class="bi bi-chevron-up"></i> Hide';
+            profileVisible = true;
+        }
+    });
+
+    // Sidebar collapse/expand (desktop) - persisted via localStorage
+    const btnCollapse = document.getElementById('btn-collapse-sidebar');
+    const btnExpand = document.getElementById('btn-expand-sidebar');
+    const cardRow = document.getElementById('card-row');
+
+    if (btnCollapse && btnExpand && cardRow) {
+        if (localStorage.getItem('sidebar-collapsed') === 'true') {
+            cardRow.classList.add('sidebar-collapsed');
+        }
+
+        btnCollapse.addEventListener('click', () => {
+            cardRow.classList.add('sidebar-collapsed');
+            localStorage.setItem('sidebar-collapsed', 'true');
+        });
+
+        btnExpand.addEventListener('click', () => {
+            cardRow.classList.remove('sidebar-collapsed');
+            localStorage.setItem('sidebar-collapsed', 'false');
+        });
+    }
+
+    // Dock icon - Restore
+    dockIcon.addEventListener('click', () => {
+        card.style.display = '';
+        card.classList.remove('card-close', 'card-minimize');
+        dockIcon.classList.remove('dock-show');
+        // Trigger reflow for animation
+        void card.offsetWidth;
+        card.classList.add('card-restore');
+        setTimeout(() => {
+            card.classList.remove('card-restore');
+        }, 400);
+    });
+</script>
