@@ -91,6 +91,14 @@
 </button>
 
 <script>
+    // Wrap tables in a scrollable container
+    document.querySelectorAll('.blog-content table').forEach(table => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
+
     // Sticky title on scroll (works for both desktop card scroll and mobile body scroll)
     const postBody = document.getElementById('post-body');
     const postTitle = document.getElementById('post-title');
