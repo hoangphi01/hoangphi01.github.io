@@ -10,6 +10,22 @@ layout: default
     <li class="nav-item"><a class="nav-link" href="{{ '/' | relative_url }}blog/"><i class="bi bi-pencil-square"></i> Blog</a></li>
 </ul>
 
-<div class="tab-content" id="page-content"></div>
+<div class="tab-content" id="page-content">
+    <div class="tab-page" id="tab-home">
+        {% include page-home.html %}
+    </div>
+    <div class="tab-page" id="tab-research" style="display:none;" aria-hidden="true">
+        {% include page-research.html %}
+    </div>
+    <div class="tab-page" id="tab-awards" style="display:none;" aria-hidden="true">
+        {% include page-awards.html %}
+    </div>
+    <div class="tab-page" id="tab-contact" style="display:none;" aria-hidden="true">
+        {% include page-contact.html %}
+    </div>
+    <div class="tab-page" id="tab-tools" style="display:none;" aria-hidden="true">
+        {% include page-tools.html %}
+    </div>
+</div>
 
 <script src="{{ '/' | relative_url }}pages.js"></script>

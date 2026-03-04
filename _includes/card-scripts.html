@@ -1,4 +1,7 @@
 <script>
+    function lsGet(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
+    function lsSet(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+
     const card = document.querySelector('.profile-card');
     const dockIcon = document.getElementById('dock-icon');
     const dotClose = document.getElementById('dot-close');
@@ -6,45 +9,63 @@
     const dotFullscreen = document.getElementById('dot-fullscreen');
     let isFullscreen = false;
 
-    // Red dot - Close
-    dotClose.addEventListener('click', () => {
+    // Keyboard support for macOS dots
+    function onKeyActivate(el, handler) {
+        el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handler();
+            }
+        });
+    }
+
+    function doClose() {
         card.classList.add('card-close');
         setTimeout(() => {
             card.style.display = 'none';
-            // Show a reopen hint after a moment
             setTimeout(() => {
                 dockIcon.classList.add('dock-show');
                 dockIcon.title = 'Click to reopen';
             }, 500);
         }, 400);
-    });
+    }
 
-    // Yellow dot - Minimize
-    dotMinimize.addEventListener('click', () => {
+    function doMinimize() {
         card.classList.add('card-minimize');
         setTimeout(() => {
             card.style.display = 'none';
             dockIcon.classList.add('dock-show');
         }, 400);
-    });
+    }
+
+    function doFullscreen() {
+        if (isFullscreen) {
+            card.classList.remove('card-fullscreen');
+            isFullscreen = false;
+            lsSet('card-fullscreen', 'false');
+        } else {
+            card.classList.add('card-fullscreen');
+            isFullscreen = true;
+            lsSet('card-fullscreen', 'true');
+        }
+    }
+
+    // Red dot - Close
+    dotClose.addEventListener('click', doClose);
+    onKeyActivate(dotClose, doClose);
+
+    // Yellow dot - Minimize
+    dotMinimize.addEventListener('click', doMinimize);
+    onKeyActivate(dotMinimize, doMinimize);
 
     // Green dot - Fullscreen toggle (persisted via localStorage)
-    if (localStorage.getItem('card-fullscreen') === 'true') {
+    if (lsGet('card-fullscreen') === 'true') {
         card.classList.add('card-fullscreen');
         isFullscreen = true;
     }
 
-    dotFullscreen.addEventListener('click', () => {
-        if (isFullscreen) {
-            card.classList.remove('card-fullscreen');
-            isFullscreen = false;
-            localStorage.setItem('card-fullscreen', 'false');
-        } else {
-            card.classList.add('card-fullscreen');
-            isFullscreen = true;
-            localStorage.setItem('card-fullscreen', 'true');
-        }
-    });
+    dotFullscreen.addEventListener('click', doFullscreen);
+    onKeyActivate(dotFullscreen, doFullscreen);
 
     // Profile toggle (mobile)
     const btnToggle = document.getElementById('btn-toggle-profile');
@@ -72,18 +93,18 @@
     const cardRow = document.getElementById('card-row');
 
     if (btnCollapse && btnExpand && cardRow) {
-        if (localStorage.getItem('sidebar-collapsed') === 'true') {
+        if (lsGet('sidebar-collapsed') === 'true') {
             cardRow.classList.add('sidebar-collapsed');
         }
 
         btnCollapse.addEventListener('click', () => {
             cardRow.classList.add('sidebar-collapsed');
-            localStorage.setItem('sidebar-collapsed', 'true');
+            lsSet('sidebar-collapsed', 'true');
         });
 
         btnExpand.addEventListener('click', () => {
             cardRow.classList.remove('sidebar-collapsed');
-            localStorage.setItem('sidebar-collapsed', 'false');
+            lsSet('sidebar-collapsed', 'false');
         });
     }
 

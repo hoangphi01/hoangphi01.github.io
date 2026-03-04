@@ -3,6 +3,57 @@
     font-family: 'Inter', sans-serif;
 }
 
+/* ==================== Accessibility ==================== */
+
+/* Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 16px;
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 0 0 8px 8px;
+    z-index: 10000;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    color: #fff;
+}
+
+/* Focus-visible outlines for keyboard navigation */
+:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.btn-back:focus-visible,
+.dot:focus-visible,
+.btn-collapse-sidebar:focus-visible,
+.btn-expand-sidebar:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.5);
+}
+
+.btn-font-decrease:focus-visible,
+.btn-font-increase:focus-visible,
+.btn-back-to-top:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.5);
+}
+
+/* Hidden tab pages */
+.tab-page-hidden {
+    display: none;
+}
+
 /* Background */
 html, body {
     margin: 0;
@@ -362,6 +413,35 @@ html, body {
 
 .nav-pills .nav-link i {
     margin-right: 3px;
+}
+
+/* Open Tool button (pill gradient style) */
+.btn-open-tool {
+    display: inline-block;
+    padding: 6px 18px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(135deg, #4ade80 0%, #2563eb 100%);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-open-tool:hover {
+    color: #fff;
+    filter: brightness(1.1);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+body.dark-mode .btn-open-tool {
+    background: linear-gradient(135deg, #4ade80 0%, #2563eb 100%);
+    color: #fff;
+}
+
+body.dark-mode .btn-open-tool:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 2px 8px rgba(74, 222, 128, 0.3);
 }
 
 /* Tab Content */
@@ -1054,7 +1134,7 @@ html, body {
 /* Font size pill */
 .btn-font-size {
     position: fixed;
-    bottom: 32px;
+    bottom: max(32px, env(safe-area-inset-bottom, 0px));
     left: 32px;
     z-index: 200;
     display: flex;
@@ -1100,7 +1180,7 @@ html, body {
 /* Back to top button */
 .btn-back-to-top {
     position: fixed;
-    bottom: 32px;
+    bottom: max(32px, env(safe-area-inset-bottom, 0px));
     right: 32px;
     z-index: 200;
     width: 36px;
@@ -1205,6 +1285,8 @@ html, body {
     text-decoration: none;
     color: #666;
     background: #fff;
+    border: none;
+    cursor: pointer;
     transition: all 0.2s ease;
 }
 
@@ -1580,6 +1662,176 @@ body.dark-mode .copy-toast {
     }
 }
 
+/* ==================== Calculation Page ==================== */
+
+.calc-content {
+    padding-bottom: 40px;
+}
+
+.calc-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.calc-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.calc-subtitle {
+    text-align: center;
+    color: #888;
+    margin-bottom: 24px;
+    font-size: 0.92rem;
+}
+
+.calc-section-title {
+    color: #22c55e;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+/* Pill-shaped buttons inside calc cards */
+.calc-content .btn {
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Calculator cards */
+.calc-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.calc-card:hover {
+    border-color: rgba(34, 197, 94, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.calc-card .card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Result areas */
+.calc-result {
+    min-height: 3rem;
+    padding: 10px 12px;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.calc-result-tall {
+    min-height: 4rem;
+}
+
+/* Dark mode for calc page */
+body.dark-mode .calc-title {
+    color: #dcddde;
+}
+
+body.dark-mode .calc-subtitle {
+    color: #777;
+}
+
+body.dark-mode .calc-section-title {
+    color: #4ade80;
+}
+
+body.dark-mode .calc-card {
+    background: #262626;
+    border-color: #383838;
+}
+
+body.dark-mode .calc-card:hover {
+    border-color: rgba(74, 222, 128, 0.3);
+}
+
+body.dark-mode .calc-card .card-title {
+    color: #dcddde;
+}
+
+body.dark-mode .calc-card h6 {
+    color: #b8b8b8;
+}
+
+body.dark-mode .calc-content .form-label {
+    color: #b8b8b8;
+}
+
+body.dark-mode .calc-content .form-control {
+    background: #1e1e1e;
+    border-color: #383838;
+    color: #dcddde;
+}
+
+body.dark-mode .calc-content .form-control::placeholder {
+    color: #666;
+}
+
+body.dark-mode .calc-content .form-check-label {
+    color: #b8b8b8;
+}
+
+body.dark-mode .calc-result {
+    background: #1e1e1e;
+    border-color: #383838;
+    color: #b8b8b8;
+}
+
+body.dark-mode .calc-content .text-muted {
+    color: #777 !important;
+}
+
+body.dark-mode .calc-content hr {
+    border-color: #383838;
+}
+
+body.dark-mode .calc-content details summary {
+    color: #777;
+}
+
+body.dark-mode .calc-content details .small {
+    color: #999;
+}
+
+/* Calc mobile responsive */
+@media (max-width: 576px) {
+    .calc-container {
+        padding: 0;
+    }
+
+    .calc-title {
+        font-size: 1.3rem;
+    }
+
+    .calc-content .btn {
+        font-size: 0.8rem;
+    }
+
+    .calc-card {
+        border-radius: 12px;
+    }
+
+    body.dark-mode .calc-content {
+        background: #1e1e1e;
+    }
+}
+
 /* ==================== Print Styles ==================== */
 @media print {
     /* Remove background image */
@@ -1611,7 +1863,11 @@ body.dark-mode .copy-toast {
 
     /* Hide navigation buttons, breadcrumb bar, print/share buttons, sticky title */
     .post-header,
-    .post-sticky-title {
+    .post-sticky-title,
+    .dock-icon,
+    .btn-font-size,
+    .btn-back-to-top,
+    .skip-link {
         display: none;
     }
 
