@@ -17,6 +17,7 @@ permalink: /blog/
 
     {% if site.posts.size > 0 %}
         {% for post in site.posts %}
+        {% if post.lang == 'vn' %}{% continue %}{% endif %}
         <a href="{{ post.url | relative_url }}" class="blog-card-link">
             <div class="mb-3 blog-card">
                 <strong>{{ post.title }}</strong>
@@ -30,8 +31,10 @@ permalink: /blog/
                     </span>
                     {% endif %}
                 </div>
-                {% if post.excerpt %}
-                <p class="blog-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+                {% if post.description %}
+                <p class="blog-excerpt">{{ post.description | truncate: 200 }}</p>
+                {% elsif post.excerpt %}
+                <p class="blog-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
                 {% endif %}
             </div>
         </a>

@@ -28,14 +28,21 @@
         }, 400);
     });
 
-    // Green dot - Fullscreen toggle
+    // Green dot - Fullscreen toggle (persisted via localStorage)
+    if (localStorage.getItem('card-fullscreen') === 'true') {
+        card.classList.add('card-fullscreen');
+        isFullscreen = true;
+    }
+
     dotFullscreen.addEventListener('click', () => {
         if (isFullscreen) {
             card.classList.remove('card-fullscreen');
             isFullscreen = false;
+            localStorage.setItem('card-fullscreen', 'false');
         } else {
             card.classList.add('card-fullscreen');
             isFullscreen = true;
+            localStorage.setItem('card-fullscreen', 'true');
         }
     });
 
