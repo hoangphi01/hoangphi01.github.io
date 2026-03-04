@@ -175,7 +175,16 @@ const pages = {
 const content = document.getElementById('page-content');
 const navLinks = document.querySelectorAll('.nav-link[data-page]');
 
+let currentPage = null;
+
+function saveScrollPos() {
+    if (currentPage) {
+        localStorage.setItem('scroll_tab_' + currentPage, content.scrollTop);
+    }
+}
+
 function loadPage(page) {
+    saveScrollPos();
     content.classList.remove('fade-in');
     content.classList.add('fade-out');
 
@@ -183,12 +192,19 @@ function loadPage(page) {
         content.innerHTML = pages[page] || 'Page not found';
         content.classList.remove('fade-out');
         content.classList.add('fade-in');
+        currentPage = page;
+        localStorage.setItem('active_tab', page);
+
+        const saved = parseInt(localStorage.getItem('scroll_tab_' + page));
+        if (saved) content.scrollTop = saved;
 
         navLinks.forEach(link => {
             link.classList.toggle('active', link.dataset.page === page);
         });
     }, 150);
 }
+
+content.addEventListener('scroll', () => { saveScrollPos(); });
 
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {

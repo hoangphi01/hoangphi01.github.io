@@ -48,9 +48,14 @@
                 </div>
 
                 <!-- Post content -->
-                <div class="post-body blog-content">
+                <div class="post-body blog-content" id="post-body">
+                    <!-- Sticky title bar (appears on scroll) -->
+                    <div class="post-sticky-title" id="sticky-title">
+                        <span class="post-sticky-title-text">{{ page.title }}</span>
+                    </div>
+
                     <article class="blog-post">
-                        <h4 class="blog-post-title">{{ page.title }}</h4>
+                        <h1 class="blog-post-title" id="post-title">{{ page.title }}</h1>
                         <div class="blog-post-meta">
                             <span><i class="bi bi-calendar3"></i> {{ page.date | date: "%B %d, %Y" }}</span>
                             {% if page.tags %}
@@ -71,7 +76,61 @@
 
 </div>
 
+<!-- Back to top button -->
+<button class="btn-back-to-top" id="btn-top" title="Back to top">
+    <i class="bi bi-chevron-up"></i>
+</button>
+
 <script>
+    // Sticky title on scroll (works for both desktop card scroll and mobile body scroll)
+    const postBody = document.getElementById('post-body');
+    const postTitle = document.getElementById('post-title');
+    const stickyTitle = document.getElementById('sticky-title');
+
+    function checkStickyTitle() {
+        const rect = postTitle.getBoundingClientRect();
+        if (rect.bottom < 0) {
+            stickyTitle.classList.add('visible');
+        } else {
+            stickyTitle.classList.remove('visible');
+        }
+    }
+
+    // Back to top button
+    const btnTop = document.getElementById('btn-top');
+
+    function checkScroll() {
+        checkStickyTitle();
+        const scrollPos = postBody.scrollTop || window.scrollY;
+        if (scrollPos > 400) {
+            btnTop.classList.add('visible');
+        } else {
+            btnTop.classList.remove('visible');
+        }
+    }
+
+    btnTop.addEventListener('click', () => {
+        postBody.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Remember scroll position
+    const scrollKey = 'scroll_post_' + location.pathname;
+
+    function savePostScroll() {
+        const pos = postBody.scrollTop || window.scrollY;
+        localStorage.setItem(scrollKey, pos);
+    }
+
+    const savedPos = parseInt(localStorage.getItem(scrollKey));
+    if (savedPos) {
+        postBody.scrollTop = savedPos;
+        if (!postBody.scrollTop) window.scrollTo(0, savedPos);
+    }
+
+    postBody.addEventListener('scroll', () => { checkScroll(); savePostScroll(); });
+    window.addEventListener('scroll', () => { checkScroll(); savePostScroll(); });
+
     document.getElementById('btn-print').addEventListener('click', () => {
         window.print();
     });
