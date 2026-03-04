@@ -731,15 +731,15 @@ html, body {
     }
 
     /* Tables: horizontal scroll within container */
-    .blog-content table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        font-size: 0.75rem;
+    .blog-content .table-wrapper {
         margin-left: -10px;
         margin-right: -10px;
         width: calc(100% + 20px);
         max-width: calc(100% + 20px) !important;
+    }
+
+    .blog-content table {
+        font-size: 0.75rem;
     }
 
     .blog-content table th,
@@ -1260,18 +1260,24 @@ html, body {
     line-height: 1.7;
 }
 
+/* Blog table wrapper (injected by JS for horizontal scroll + rounded corners) */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    margin: 12px 0;
+}
+
 /* Blog tables */
 .blog-content table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin: 12px 0;
     font-size: 0.88rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: block;
+    margin: 0;
+    border: none;
+    border-radius: 0;
 }
 
 .blog-content table th,
@@ -1419,6 +1425,10 @@ body.dark-mode .blog-content a {
 }
 
 /* Dark mode tables */
+body.dark-mode .table-wrapper {
+    border-color: #383838;
+}
+
 body.dark-mode .blog-content table {
     border-color: #383838;
 }
