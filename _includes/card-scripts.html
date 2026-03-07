@@ -2,6 +2,45 @@
     function lsGet(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
     function lsSet(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
 
+    // Page transition system
+    function getTransitionColor() {
+        return document.body.classList.contains('dark-mode') ? '#1e1e2e' : '#ffffff';
+    }
+
+    // Fade-in on page load
+    (function() {
+        var overlay = document.createElement('div');
+        overlay.className = 'page-transition';
+        overlay.style.background = getTransitionColor();
+        document.body.appendChild(overlay);
+        requestAnimationFrame(function() {
+            overlay.classList.add('fade-in');
+        });
+        overlay.addEventListener('transitionend', function() { overlay.remove(); });
+    })();
+
+    // Intercept cross-page nav links for smooth transition
+    document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        // Only intercept full page navigations (not hash-only links)
+        if (!href || href.startsWith('#') || href.startsWith('javascript') || link.target === '_blank') return;
+        // Skip if it's a data-page tab link (handled by pages.js)
+        if (link.dataset.page) return;
+        e.preventDefault();
+        var overlay = document.createElement('div');
+        overlay.className = 'page-transition fade-in';
+        overlay.style.background = getTransitionColor();
+        overlay.style.transition = 'opacity 0.25s cubic-bezier(0.4, 0, 1, 1)';
+        document.body.appendChild(overlay);
+        requestAnimationFrame(function() {
+            overlay.classList.remove('fade-in');
+            overlay.classList.add('fade-out');
+        });
+        setTimeout(function() { location.href = href; }, 250);
+    });
+
     const card = document.querySelector('.profile-card');
     const dockIcon = document.getElementById('dock-icon');
     const dotClose = document.getElementById('dot-close');

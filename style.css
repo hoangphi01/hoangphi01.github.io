@@ -415,6 +415,14 @@ html, body {
     margin-right: 3px;
 }
 
+.nav-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    vertical-align: -3px;
+    margin-right: 3px;
+}
+
 /* Open Tool button (pill gradient style) */
 .btn-open-tool {
     display: inline-block;
@@ -698,6 +706,13 @@ body.dark-mode .btn-open-tool:hover {
         display: block;
         font-size: 1.15rem;
         margin-right: 0;
+    }
+
+    .nav-icon {
+        display: block;
+        width: 22px;
+        height: 22px;
+        margin: 0 auto;
     }
 
     .nav-pills .nav-link.active {
@@ -1043,6 +1058,27 @@ body.dark-mode .btn-open-tool:hover {
     flex-shrink: 0;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+    display: block;
+}
+
+.font-btn-icon {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+    display: block;
+}
+
+.meta-icon {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    vertical-align: -2px;
 }
 
 .btn-back:hover {

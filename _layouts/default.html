@@ -27,10 +27,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="{{ '/' | relative_url }}style.css">
+    <style>
+        .page-transition {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 99999; pointer-events: none;
+            opacity: 1; transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1);
+        }
+        .page-transition.fade-out { opacity: 1; pointer-events: all; }
+        .page-transition.fade-in { opacity: 0; }
+    </style>
 </head>
 <body>
 
-<a class="skip-link" href="#page-content">Skip to content</a>
+<a class="skip-link" href="#page-content" style="position:absolute;top:-50px">Skip to content</a>
 
 <div class="page-wrapper">
     <div class="card profile-card">
@@ -43,7 +52,7 @@
             <div class="row g-0" id="card-row">
                 <!-- Expand button (shown when sidebar collapsed) -->
                 <button class="btn-expand-sidebar" id="btn-expand-sidebar" title="Show sidebar">
-                    <i class="bi bi-chevron-right"></i>
+                    <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
                 </button>
 
                 <!-- Left Column - Profile -->
