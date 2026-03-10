@@ -22,3 +22,4 @@ exclude:
 include:
   - calculation.html
   - calculation.js
+  - _icons
